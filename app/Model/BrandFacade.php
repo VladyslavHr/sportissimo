@@ -12,13 +12,12 @@ final class BrandFacade
 
 	}
 
-    private const ITEMS_PER_PAGE = 5; // количество брендов на странице
+    private const ITEMS_PER_PAGE = 5;
 
 	public function getPublicBrands(): Nette\Database\Table\Selection
 	{
 		return $this->database->table('brands');
 	}
-
 
 	public function getBrandsCount(): int
 	{
