@@ -1,0 +1,104 @@
+{* This is the welcome page, you can delete it *}
+{include content}
+
+{block content}
+<div class="container">
+
+    <div class="block">
+
+    <h1>Značky {$brandsCount}</h1>
+    <a class="waves-effect waves-light btn" n:href="Edit:create">Vytvořit značku</a>
+
+        <div class="row">
+            <div class="input-field col s6">
+                <form method="get" action="">
+                    <select name="itemsPerPage" onchange="this.form.submit()">
+                        <option value="5" {if $itemsPerPage == 5}selected{/if}>5</option>
+                        <option value="10" {if $itemsPerPage == 10}selected{/if}>10</option>
+                        <option value="20" {if $itemsPerPage == 20}selected{/if}>20</option>
+                    </select>
+                    <input type="hidden" name="page" value="{$page}" />
+                    <input type="hidden" name="sort" value="{$sort}" />
+                </form>
+            </div>
+
+            <div class="input-field col s6">
+                <form method="get" action="">
+                    <select name="sort" onchange="this.form.submit()">
+                        <option value="asc" {if $sort == 'asc'}selected{/if}>Vzestupně</option>
+                        <option value="desc" {if $sort == 'desc'}selected{/if}>Sestupně</option>
+                    </select>
+                    <input type="hidden" name="itemsPerPage" value="{$itemsPerPage}" />
+                    <input type="hidden" name="page" value="{$page}" />
+                </form>
+            </div>
+        </div>
+        <ul class="pagination">
+            {if $page > 1}
+                <li class="active"><a n:href="default, 1, 'itemsPerPage' => $itemsPerPage, 'sort' => $sort" class="waves-effect">První</a></li>
+                <li class="active"><a n:href="default, $page - 1, 'itemsPerPage' => $itemsPerPage, 'sort' => $sort" class="waves-effect">Předchozí</a></li>
+            {/if}
+            {for $i = 1; $i <= $lastPage; $i++}
+                {if $i == $page}
+                    <li class="active"><a n:href="default, $i, 'itemsPerPage' => $itemsPerPage, 'sort' => $sort" class="waves-effect">{$i}</a></li>
+                {else}
+                    <li class="waves-effect"><a n:href="default, $i, 'itemsPerPage' => $itemsPerPage, 'sort' => $sort" class="waves-effect">{$i}</a></li>
+                {/if}
+            {/for}
+            {if $page < $lastPage}
+                <li class="active"><a n:href="default, $page + 1, 'itemsPerPage' => $itemsPerPage, 'sort' => $sort" class="waves-effect">Další</a></li>
+                <li class="active"><a n:href="default, $lastPage, 'itemsPerPage' => $itemsPerPage, 'sort' => $sort" class="waves-effect">Poslední</a></li>
+            {/if}
+        </ul>
+
+        <div n:foreach="$brands as $brand" class="brand">
+            <div class="row brand-row">
+                <div class="title col s4">
+                    <h4>
+                        {$brand->title}
+                    </h4>
+                </div>
+                <div class="date col s4">
+                    <h6>
+                        Vytvoreno: {$brand->created_at|date:'F j, Y'}
+                    </h6>
+                </div>
+                <div class="id col s4">
+                    <h6>
+                        ID: {$brand->id}
+                    </h6>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col s8">{$brand->description|truncate:256}</div>
+                <div class="col s2">
+                <a class="waves-effect waves-light btn blue darken-1" n:href="Edit:edit $brand->id">Upravit značku</a>
+                </div>
+                <div class="col s2">
+                    <a class="waves-effect waves-light btn red darken-2" n:href="Edit:delete $brand->id">Vymazat</a>
+                </div>
+            </div>
+        
+        </div>
+
+        <ul class="pagination bottom-paginate">
+            {if $page > 1}
+                <li class="active"><a n:href="default, 1, 'itemsPerPage' => $itemsPerPage, 'sort' => $sort" class="waves-effect">První</a></li>
+                <li class="active"><a n:href="default, $page - 1, 'itemsPerPage' => $itemsPerPage, 'sort' => $sort" class="waves-effect">Předchozí</a></li>
+            {/if}
+            {for $i = 1; $i <= $lastPage; $i++}
+                {if $i == $page}
+                    <li class="active"><a n:href="default, $i, 'itemsPerPage' => $itemsPerPage, 'sort' => $sort" class="waves-effect">{$i}</a></li>
+                {else}
+                    <li class="waves-effect"><a n:href="default, $i, 'itemsPerPage' => $itemsPerPage, 'sort' => $sort" class="waves-effect">{$i}</a></li>
+                {/if}
+            {/for}
+            {if $page < $lastPage}
+                <li class="active"><a n:href="default, $page + 1, 'itemsPerPage' => $itemsPerPage, 'sort' => $sort" class="waves-effect">Další</a></li>
+                <li class="active"><a n:href="default, $lastPage, 'itemsPerPage' => $itemsPerPage, 'sort' => $sort" class="waves-effect">Poslední</a></li>
+            {/if}
+        </ul>
+    </div>
+
+</div>

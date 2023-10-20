@@ -1,0 +1,27 @@
+.container{
+    padding: 50px 0;
+}
+
+.block{
+    padding: 15px;
+    box-shadow: 0px 0px 5px 5px #c5c5c5;
+}
+
+.brand{
+    border-top: 1px solid;
+}
+
+.brand-row{
+    display: flex;
+    align-items: center;
+}
+
+.bottom-paginate{
+    padding-top: 15px;
+    border-top: 1px solid;
+}
+
+.waves-button-input{
+    cursor: pointer;
+    color: #fff;
+}

@@ -1,0 +1,10 @@
+services:
+	- App\Router\RouterFactory::createRouter
+	- App\Model\BrandFacade
+
+
+search:
+	-	in: %appDir%
+		classes:
+			- *Factory
+			- *Facade
